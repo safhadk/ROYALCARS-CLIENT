@@ -5,7 +5,7 @@ import ChatsComponent from "../ChatsComponent/Chats";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-const socket = io.connect("http://localhost:5000");
+const socket = io.connect("https://royalcars.onrender.com");
 
 
 
