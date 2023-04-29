@@ -85,8 +85,6 @@ function ChatsComponent({ socket, username, room, ownerId }) {
     setMessageList(data.messages)
   }
 
-
-
   useEffect(() => {
 
       getAllUsers()
@@ -94,8 +92,7 @@ function ChatsComponent({ socket, username, room, ownerId }) {
     console.log("in useeff")
 
       getMessages()
-    
-      
+     
     socket.on("receive_message", (data) => {
       setMessageList((list) => [...list, data]);
     });
@@ -306,10 +303,6 @@ function ChatsComponent({ socket, username, room, ownerId }) {
                             )
                           ))}
 
-                    
-
-                       
-
                       </div>
 
                     </ScrollToBottom>
@@ -337,7 +330,6 @@ function ChatsComponent({ socket, username, room, ownerId }) {
 
                   </div>
                   
-
                 </div>
 
               </div>
