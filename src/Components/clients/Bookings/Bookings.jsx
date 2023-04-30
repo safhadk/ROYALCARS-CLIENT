@@ -11,6 +11,9 @@ function Bookings() {
 
   let token = useSelector((state) => state.Client.Token);
   const [bookings,setBookings]=useState({})
+  const [show,setshow]=useState({})
+  const [SearchInput,setSearchInput]=useState("")
+  const [event,setevent]=useState("")
 
   
  
@@ -25,12 +28,45 @@ function Bookings() {
       Authorization: `Bearer ${token}`,
     }}).then((res) => {
       setBookings(res.data)
+      setshow(res.data)
          console.log(res.data,"response here")
  
    }).catch((error) => {
        console.log(error.message);
    });
 }, []);
+
+const handleChange = (event) => {
+  console.log(event.target.value);
+  
+  if (event.target.value=='Completed') {
+    console.log('yes')
+    let Completed = bookings.filter((booking) => booking.status=='Completed');
+    console.log(Completed)
+    setshow(Completed); 
+    setevent(event.target.value)
+  } else if(event.target.value=='Upcoming') {
+    console.log('no')
+    let pending = bookings.filter((booking) => booking.status!=='Completed');
+    console.log(pending)
+    setshow(pending);
+    setevent('Upcoming')
+  }else{
+    setshow(bookings);
+    setevent('All Bookings')
+  }
+}
+
+const handleSearch = (event) => {
+  setSearchInput(event.target.value)
+  
+ if(event.target.value){
+  let uppdateUse=bookings.filter((item)=>item.bookingId.toLowerCase().indexOf(event.target.value.toLowerCase()) !== -1   )
+  setshow(uppdateUse)
+ }else{
+  setshow(bookings)
+ }
+}
   return (
 
     <div id="main-wrapper">
@@ -48,14 +84,16 @@ function Bookings() {
                                         <div class="row">
 
                                             <div class="col-md-8 mb-3 mb-md-0">
-                                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="exampleInputEmail1" placeholder="search by name"/>
+                                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="exampleInputEmail1" placeholder="search by booking Id" onChange={handleSearch}
+                                         value={SearchInput}/>
                                             </div>
 
                                             <div class="col-md-4">
-                                                <select class="form-control form-select">
-                                                    <option>Booking Amount</option>
-                                                    <option>Highest To Lowest</option>
-                                                    <option>Lowest To Highest</option>
+                                                <select class="form-control form-select" onChange={handleChange}
+                                                 >
+                                                    <option>All Bookings</option>
+                                                    <option>Upcoming</option>
+                                                    <option>Completed</option>
                                                 </select>
                                             </div>
 
@@ -88,7 +126,7 @@ function Bookings() {
                 </tr>
               </thead>
               <tbody>
-                {bookings.length > 0 && bookings.map((booking,index)=>(
+                {show.length > 0 && show.map((booking,index)=>(
                 <tr>
                   <th scope="row">{index + 1}</th>
                   <td>

@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 const socket = io.connect("https://royalcars.onrender.com");
+// const socket = io.connect("http://localhost:5000");
 
 
 

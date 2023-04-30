@@ -46,8 +46,7 @@ function ChatsComponent({ socket, username, room, ownerId }) {
           Authorization: `Bearer ${token}`,
         }
       })
-
-
+ 
       console.log(data, "in db ")
 
       setCurrentMessage("");
