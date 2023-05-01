@@ -16,11 +16,7 @@ function Locations() {
     }
 
     useEffect(() => {
-      axios.get("/locations", {
-                headers: {
-                Authorization: `Bearer ${token}`,
-                },
-            })
+      axios.get("/locations")
             .then((res) => {
               console.log(res.data,"response")
               setLocation(res.data)

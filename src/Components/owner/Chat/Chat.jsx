@@ -8,20 +8,14 @@ import { useLocation } from "react-router-dom";
 const socket = io.connect("https://royalcars.onrender.com");
 // const socket = io.connect("http://localhost:5000");
 
-
-
 function Chat() {
     const location=useLocation();
     let name = useSelector((state) => state.Owner.name);
     const [OwnerId, setOwnerId] = useState(null);
-    // console.log(location.state.ownerId)
-    // setOwnerId('6420e623073459e3b4ae27ac')
-  
     const [username, setUsername] = useState("");
     const [room, setRoom] = useState("");
     const [showChat, setShowChat] = useState(false);
 
-  
     const joinRoom = () => {
         setUsername(name);
         setRoom(1234);
