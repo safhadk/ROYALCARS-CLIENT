@@ -1,27 +1,13 @@
 
 import React ,{useEffect,useState }from 'react'
-import { useNavigate } from 'react-router-dom';
-import { useSelector } from "react-redux";
-import axios from '../../../Axios/adminAxios';
+import axios from '../../../Axios/userAxios';
 
 
 function Locations() {
     const [location,setLocation]=useState({})
 
-    const navigate = useNavigate();
-    let token = useSelector((state) => state.Admin.Token);
-
-
-    if (!token) {
-        navigate("/admin");
-    }
-
     useEffect(() => {
-      axios.get("/locations", {
-                headers: {
-                Authorization: `Bearer ${token}`,
-                },
-            })
+      axios.get("/locations")
             .then((res) => {
               console.log(res.data,"response")
               setLocation(res.data)
